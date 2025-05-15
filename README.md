@@ -104,7 +104,7 @@ Edit the environment variables in `docker-compose.yml`
 docker-compose up
 ```
 
-This will start all services, including MySQL, RabbitMQ, and the three application services.
+This will start all services.
 
 ## Service Communication
 
