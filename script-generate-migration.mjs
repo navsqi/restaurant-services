@@ -1,6 +1,6 @@
 import { execSync } from 'child_process';
 
-// example command: yarn migration:generate create-table-user
+// example command: npm run migration:generate create-table-user
 // the migration file will be placed in /src/common/database/migrations
 const name = process.argv[2];
 

@@ -1,8 +1,8 @@
 import { execSync } from 'child_process';
 import { join } from 'path';
 
-// example command: yarn migration:create create-user-seeder
-// the migration file will be placed in libs/database/src/mysql//migrations
+// example command: npm run migration:create create-user-seeder
+// the migration file will be placed in libs/database/src/mysql/migrations
 const migrationName = process.argv[2];
 
 if (!migrationName) {

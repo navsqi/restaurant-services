@@ -13,8 +13,7 @@
     "migration:create": "node script-create-migration.mjs",
     "migration:generate": "node script-generate-migration.mjs",
     "migration:run": "ts-node -P ./libs/database/tsconfig.json -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run -d ./libs/database/src/mysql/typeorm.config.ts",
-    "migration:revert": "npx ts-node -P ./libs/database/tsconfig.json -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:revert -d ./libs/database/src/mysql/typeorm.config.ts",
-    "resource:generate": "node script-generate-resource.mjs"
+    "migration:revert": "npx ts-node -P ./libs/database/tsconfig.json -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:revert -d ./libs/database/src/mysql/typeorm.config.ts"
   },
   "private": true,
   "dependencies": {
