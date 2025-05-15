@@ -106,18 +106,6 @@ docker-compose up
 
 This will start all services, including MySQL, RabbitMQ, and the three application services.
 
-## System Architecture
-
-```
-┌─────────────────┐      ┌─────────────────┐      ┌─────────────────┐
-│                 │      │                 │      │                 │
-│  Order Service  │◄────►│ Kitchen Service │◄────►│ Notification    │
-│  (Port: 3001)   │      │  (Port: 3002)   │      │  Service        │
-│                 │      │                 │      │  (Port: 3003)   │
-└─────────────────┘      └─────────────────┘      └─────────────────┘
-
-```
-
 ## Service Communication
 
 - **RabbitMQ Exchanges & Queues**:
