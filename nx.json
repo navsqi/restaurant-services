@@ -1,4 +1,7 @@
 {
+  "tui": {
+    "enabled": false
+  },
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "defaultBase": "master",
   "namedInputs": {
@@ -38,7 +41,20 @@
       "options": {
         "targetName": "test"
       },
-      "exclude": ["apps/nest-monorepo-e2e/**/*"]
+      "exclude": [
+        "apps/nest-monorepo-e2e/**/*",
+        "apps/order-service-e2e/**/*",
+        "apps/kitchen-service-e2e/**/*",
+        "apps/notification-service-e2e/**/*",
+        "apps/tes-e2e/**/*"
+      ]
     }
-  ]
+  ],
+  "targetDefaults": {
+    "@nx/js:tsc": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
+    }
+  }
 }

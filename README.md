@@ -1,82 +1,143 @@
-# NestMonorepo
+# Food Ordering System
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+This repository contains assessment task project for PT. Usaha Kreatif Indonesia. It's a microservices-based application built as a demonstration of technical skills for Full-stack Developer position.
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+The system consists of three services:
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/nest?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+- **Order Service**
+- **Kitchen Service**
+- **Notification Service**
 
-## Finish your remote caching setup
+## Tech Stack
 
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/6AyFTeB4ix)
+- **Backend**: NestJS, TypeORM
+- **Monorepo**: NX
+- **Database**: MySQL
+- **Messaging**: RabbitMQ
+- **Notifications**: SMTP for email
+- **API Documentation**: Swagger
+- **Containerization**: Docker
 
+## Getting Started
 
-## Run tasks
+### Prerequisites
 
-To run the dev server for your app, use:
+- Node.js (v22)
+- MySQL (local or remote)
+- RabbitMQ (local or remote)
+- SMTP server for email notifications
 
-```sh
-npx nx serve nest-monorepo
+### Local Setup
+
+1. **Clone the repository**
+
+```bash
+git clone https://github.com/navsqi/restaurant-services.git
+cd restaurant-services
 ```
 
-To create a production bundle:
+2. **Install dependencies**
 
-```sh
-npx nx build nest-monorepo
+```bash
+npm install
 ```
 
-To see all available targets to run for a project, run:
+3. **Create environment files**
 
-```sh
-npx nx show project nest-monorepo
+```bash
+cp .env.example .env
+cp apps/order-service/.env.example apps/order-service/.env
+cp apps/kitchen-service/.env.example apps/kitchen-service/.env
+cp apps/notification-service/.env.example apps/notification-service/.env
 ```
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+4. **Configure environment variables**
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+Adjust the `.env` files with your local configuration for:
 
-## Add new projects
+- MySQL database connection
+- RabbitMQ connection
+- SMTP server details
 
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
+> **Note**: For cloud credentials, contact: nauvalsh@gmail.com
 
-Use the plugin's generator to create new projects.
+5. **Run database migrations and seed data**
 
-To generate a new application, use:
-
-```sh
-npx nx g @nx/nest:app demo
+```bash
+npm run migration:run
 ```
 
-To generate a new library, use:
+6. **Start the services**
 
-```sh
-npx nx g @nx/node:lib mylib
+```bash
+# Start Order Service
+npm run dev:order-service
+
+# Start Kitchen Service
+npm run dev:kitchen-service
+
+# Start Notification Service
+npm run dev:notification-service
 ```
 
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
+### API Documentation
 
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+Each service has Swagger documentation available at:
 
+- Order Service: http://localhost:3001/docs
+- Kitchen Service: http://localhost:3002/docs
+- Notification Service: http://localhost:3003/docs
 
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+## Docker Setup
 
-## Install Nx Console
+If you prefer running the application using Docker:
 
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
+1. **Configure Docker environment**
 
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+Edit the environment variables in `docker-compose.yml`
 
-## Useful links
+> **Note**: For cloud credentials, contact: nauvalsh@gmail.com
 
-Learn more:
+2. **Start the containers**
 
-- [Learn more about this workspace setup](https://nx.dev/nx-api/nest?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+```bash
+docker-compose up
+```
 
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+This will start all services, including MySQL, RabbitMQ, and the three application services.
+
+## System Architecture
+
+```
+┌─────────────────┐      ┌─────────────────┐      ┌─────────────────┐
+│                 │      │                 │      │                 │
+│  Order Service  │◄────►│ Kitchen Service │◄────►│ Notification    │
+│  (Port: 3001)   │      │  (Port: 3002)   │      │  Service        │
+│                 │      │                 │      │  (Port: 3003)   │
+└─────────────────┘      └─────────────────┘      └─────────────────┘
+
+```
+
+## Service Communication
+
+- **RabbitMQ Exchanges & Queues**:
+  - `orders` exchange (fanout)
+  - `order.process` queue
+  - `order.confirmation` queue
+
+## Development
+
+## Troubleshooting
+
+If you encounter any issues:
+
+1. Ensure all environment variables are correctly set
+2. Check that MySQL and RabbitMQ are running and accessible
+3. Verify that the ports (3001, 3002, 3003) are not in use by other applications
+4. For SMTP issues, ensure your email provider credentials are correct
+
+## Contact
+
+For cloud credentials or any questions:
+
+- Email: nauvalsh@gmail.com

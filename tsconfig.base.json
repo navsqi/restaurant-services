@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@nest-monorepo/common": ["libs/common/src/index.ts"],
+      "@nest-monorepo/database": ["libs/database/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

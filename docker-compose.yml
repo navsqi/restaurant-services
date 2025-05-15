@@ -1,0 +1,93 @@
+version: '3.8'
+
+services:
+  order-service:
+    build:
+      context: .
+      dockerfile: ./apps/order-service/Dockerfile
+    container_name: order-service
+    restart: unless-stopped
+    ports:
+      - '3001:3001'
+    environment:
+      - NAME=order-service
+      - NODE_ENV=development
+      - PORT=3001
+      - RABBITMQ_URL=amqps://asgkxwyo:xxx@toucan.lmq.cloudamqp.com/asgkxwyo
+      - MAIL_HOST=sandbox.smtp.mailtrap.io
+      - MAIL_PORT=2525
+      - MAIL_USER=fd85353339b9be
+      - MAIL_PASSWORD=xxx
+      - MAIL_FROM=nauvalsh@gmail.com
+      - MAIL_SECURE=false
+      - DB_USERNAME=freedb_nauval
+      - DB_PASSWORD=xxx
+      - DB_HOST=sql.freedb.tech
+      - DB_PORT=3306
+      - DB_NAME=freedb_test_resto
+    volumes:
+      - /app/node_modules
+    networks:
+      - microservices-network
+
+  kitchen-service:
+    build:
+      context: .
+      dockerfile: ./apps/kitchen-service/Dockerfile
+    container_name: kitchen-service
+    restart: unless-stopped
+    ports:
+      - '3002:3002'
+    environment:
+      - NODE_ENV=development
+      - PORT=3002
+      - NAME=kitchen-service
+      - RABBITMQ_URL=amqps://asgkxwyo:xxx@toucan.lmq.cloudamqp.com/asgkxwyo
+      - MAIL_HOST=sandbox.smtp.mailtrap.io
+      - MAIL_PORT=2525
+      - MAIL_USER=fd85353339b9be
+      - MAIL_PASSWORD=xxx
+      - MAIL_FROM=nauvalsh@gmail.com
+      - MAIL_SECURE=false
+      - DB_USERNAME=freedb_nauval
+      - DB_PASSWORD=xxx
+      - DB_HOST=sql.freedb.tech
+      - DB_PORT=3306
+      - DB_NAME=freedb_test_resto
+    volumes:
+      - /app/node_modules
+    networks:
+      - microservices-network
+
+  notification-service:
+    build:
+      context: .
+      dockerfile: ./apps/notification-service/Dockerfile
+    container_name: notification-service
+    restart: unless-stopped
+    ports:
+      - '3003:3003'
+    environment:
+      - NODE_ENV=development
+      - PORT=3003
+      - NAME=notification-service
+      - RABBITMQ_URL=amqps://asgkxwyo:xxx@toucan.lmq.cloudamqp.com/asgkxwyo
+      - MAIL_HOST=sandbox.smtp.mailtrap.io
+      - MAIL_PORT=2525
+      - MAIL_USER=fd85353339b9be
+      - MAIL_PASSWORD=xxx
+      - MAIL_FROM=nauvalsh@gmail.com
+      - MAIL_SECURE=false
+      - DB_USERNAME=freedb_nauval
+      - DB_PASSWORD=xxx
+      - DB_HOST=sql.freedb.tech
+      - DB_PORT=3306
+      - DB_NAME=freedb_test_resto
+    volumes:
+      - /app/node_modules
+    networks:
+      - microservices-network
+
+networks:
+  microservices-network:
+    driver: bridge
